@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apply – Raja Choudhary | Social Media Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #D4A843;
+  --gold-light: #E8C56A;
+  --gold-dim: rgba(212,168,67,0.15);
+  --bg: #07070D;
+  --surface: #0D0D18;
+  --card: #13131F;
+  --card2: #18182A;
+  --text: #F0EEE8;
+  --muted: #6E6E8A;
+  --border: #1E1E30;
+  --border2: #2A2A42;
+  --green: #2ECC7A;
+  --red: #E05555;
+  --accent: #7B68EE;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 20% 0%, rgba(212,168,67,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 80% 100%, rgba(123,104,238,0.05) 0%, transparent 60%);
+}
+
+/* PRIVATE GATE */
+#privateGate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  padding: 24px;
+}
+#privateGate .gate-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+#privateGate h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; margin-bottom: 6px; }
+#privateGate p { color: var(--muted); font-size: 14px; max-width: 340px; margin: 0 auto 20px; }
+.gate-box { background: var(--card); border: 1px solid var(--border2); border-radius: 16px; padding: 32px; max-width: 380px; width: 100%; }
+.gate-input { width: 100%; background: #0E0E1A; border: 1px solid var(--border2); border-radius: 10px; padding: 13px 16px; color: #fff; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
+.gate-input:focus { border-color: var(--gold); }
+.gate-btn { width: 100%; background: var(--gold); color: #07070D; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: background 0.2s; }
+.gate-btn:hover { background: var(--gold-light); }
+.gate-err { color: var(--red); font-size: 12px; margin-top: 8px; display: none; }
+.lock-icon { font-size: 48px; margin-bottom: 8px; }
+
+/* TOP BAR */
+.topbar {
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  height: 3px;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 52px;
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(7,7,13,0.96);
+  backdrop-filter: blur(16px);
+  z-index: 200;
+}
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+.logo small { display: block; font-family: 'Outfit', sans-serif; font-size: 9px; font-weight: 400; color: var(--muted); letter-spacing: 3px; margin-top: -3px; text-transform: uppercase; }
+.nav-right { display: flex; gap: 10px; align-items: center; }
+.btn-admin {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.btn-admin:hover { border-color: var(--gold); color: var(--gold); }
+.btn-cta {
+  background: var(--gold);
+  color: #07070D;
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.3px;
+}
+.btn-cta:hover { background: var(--gold-light); }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 96px 24px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 4px;
+  padding: 6px 18px;
+  border-radius: 4px;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '✦';
+  font-size: 8px;
+  opacity: 0.7;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+.hero h1 em { color: var(--gold); font-style: normal; }
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 460px;
+  margin: 0 auto 40px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero-cta {
+  display: inline-block;
+  background: var(--gold);
+  color: #07070D;
+  padding: 14px 38px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.hero-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(212,168,67,0.25); }
+.hero-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--muted);
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  transition: all 0.2s;
+}
+.hero-secondary:hover { color: var(--text); border-color: var(--border2); }
+
+/* DIVIDER */
+.sdiv {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 52px;
+  margin: 4px 0;
+}
+.sdiv::before, .sdiv::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+.sdiv span { font-size: 9px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
+
+/* ROLES */
+.roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 0 52px 64px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.role-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 22px;
+  text-align: left;
+  transition: border-color 0.25s, transform 0.25s, background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.role-card:hover { border-color: var(--border2); background: var(--card2); transform: translateY(-2px); }
+.role-card:hover::before { opacity: 1; }
+.role-num { font-size: 9px; letter-spacing: 4px; color: var(--gold); margin-bottom: 14px; text-transform: uppercase; }
+.role-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.role-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* PERKS */
+.perks-section {
+  background: var(--surface);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  padding: 52px 52px;
+  text-align: center;
+}
+.perks-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 32px; }
+.perks-section h2 span { color: var(--gold); }
+.perks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.perk {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 18px 12px;
+  background: var(--card);
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
+  transition: border-color 0.2s, color 0.2s;
+}
+.perk:hover { border-color: var(--border2); color: var(--text); }
+.perk-icon { font-size: 20px; margin-bottom: 8px; }
+
+/* ====== FORM SECTION ====== */
+.form-section {
+  padding: 72px 24px;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.form-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.form-section > p { color: var(--muted); margin-bottom: 36px; font-size: 14px; }
+
+.reg-form {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 18px;
+  padding: 40px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.reg-form::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Form group */
+.form-group { margin-bottom: 22px; }
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 7px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.req { color: var(--gold); font-size: 10px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: #0A0A15;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: #0D0D1C;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #3A3A55; }
+.form-group select option { background: #111; }
+.form-group textarea { resize: vertical; min-height: 90px; }
+.form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.input-hint { font-size: 11px; color: #3A3A55; margin-top: 5px; }
+
+/* Follower wrapper - manual input */
+.follower-wrap { position: relative; }
+.follower-wrap input { padding-right: 80px; }
+.follower-unit {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--muted);
+  pointer-events: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Privacy box */
+.privacy-box {
+  background: rgba(46,204,122,0.05);
+  border: 1px solid rgba(46,204,122,0.15);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 22px 0 26px;
+}
+.privacy-box p { font-size: 12px; color: #5A8F70; line-height: 1.7; }
+.privacy-box strong { color: var(--green); }
+
+/* Section label */
+.form-section-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  margin-top: 28px;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form-section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+.form-section-label:first-child { margin-top: 0; }
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  background: var(--gold);
+  color: #07070D;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.3px;
+}
+.submit-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(212,168,67,0.3);
+}
+.submit-btn:active { transform: translateY(0); }
+
+/* SUCCESS */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 48px 24px;
+}
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(212,168,67,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 18px;
+}
+.success-msg h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--gold); margin-bottom: 8px; }
+.success-msg p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+/* CONTACT */
+.contact-section {
+  background: var(--surface);
+  border-top: 0.5px solid var(--border);
+  padding: 56px 24px;
+  text-align: center;
+}
+.contact-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--card2);
+  border: 1.5px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  color: var(--gold);
+  margin: 0 auto 16px;
+}
+.contact-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 4px; }
+.contact-role { color: var(--gold); font-size: 9px; letter-spacing: 3px; margin-bottom: 20px; text-transform: uppercase; }
+.contact-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.contact-link {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 18px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.contact-link:hover { border-color: var(--gold); color: var(--gold); }
+.contact-link--ig { border-color: rgba(225,48,108,0.3); color: #E1306C; }
+.contact-link--ig:hover { border-color: #E1306C; color: #E1306C; background: rgba(225,48,108,0.06); }
+.contact-handle { font-size: 11px; opacity: 0.7; margin-left: 4px; }
+
+footer {
+  text-align: center;
+  padding: 22px;
+  font-size: 11px;
+  color: #2A2A3A;
+  border-top: 0.5px solid var(--border);
+  letter-spacing: 0.5px;
+}
+footer span { color: var(--gold); }
+
+/* ====== ADMIN PANEL ====== */
+.admin-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+.admin-panel {
+  position: fixed;
+  top: 0; right: 0;
+  width: min(820px, 100vw);
+  height: 100vh;
+  background: #080810;
+  border-left: 1px solid var(--border);
+  z-index: 1001;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.admin-header {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); }
+.admin-header p { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.admin-close { background: transparent; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 4px 8px; transition: color 0.2s; }
+.admin-close:hover { color: #fff; }
+
+/* LOGIN */
+.admin-login { padding: 52px 36px; display: flex; flex-direction: column; gap: 14px; }
+.admin-login h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #fff; margin-bottom: 2px; }
+.admin-login p { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.admin-login input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.admin-login input:focus { border-color: var(--gold); }
+.admin-login-btn {
+  background: var(--gold);
+  color: #07070D;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: background 0.2s;
+}
+.admin-login-btn:hover { background: var(--gold-light); }
+.login-err { color: var(--red); font-size: 12px; display: none; }
+
+/* SETTINGS section */
+.settings-section {
+  display: none;
+  padding: 20px 24px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.settings-title { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
+.settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.setting-item label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 5px; }
+.setting-item input, .setting-item select {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.setting-item input:focus, .setting-item select:focus { border-color: var(--gold); }
+.save-settings-btn {
+  margin-top: 10px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+}
+.save-settings-btn:hover { background: var(--gold); color: #07070D; }
+.settings-saved { font-size: 11px; color: var(--green); display: none; margin-top: 6px; }
+.settings-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+.stab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+}
+.stab.active, .stab:hover { border-color: var(--gold); color: var(--gold); }
+.stab-panel { display: none; }
+.stab-panel.active { display: block; }
+
+/* DASHBOARD */
+.admin-dash { display: none; flex-direction: column; height: 100%; overflow: hidden; }
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  flex-shrink: 0;
+}
+.stat-box { background: var(--card); border-radius: 8px; padding: 12px 10px; text-align: center; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); font-weight: 700; line-height: 1; }
+.stat-lbl { font-size: 9px; color: var(--muted); letter-spacing: 2px; margin-top: 4px; text-transform: uppercase; }
+
+.admin-toolbar {
+  padding: 12px 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 0.5px solid var(--border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 140px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 12px;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  outline: none;
+}
+.search-box:focus { border-color: var(--gold); }
+.filter-sel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 12px;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+.export-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.export-btn:hover { background: var(--gold); color: #07070D; }
+.clear-btn {
+  background: transparent;
+  border: 1px solid #2A1A1A;
+  color: var(--red);
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+}
+.clear-btn:hover { border-color: var(--red); }
+.settings-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+}
+.settings-btn:hover { border-color: var(--border2); color: var(--text); }
+
+.admin-table-wrap { flex: 1; overflow-y: auto; padding: 0 20px 20px; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 16px; }
+.admin-table th {
+  text-align: left;
+  padding: 8px 10px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  font-size: 9px;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: #080810;
+}
+.admin-table td { padding: 12px 10px; border-bottom: 0.5px solid #11111E; vertical-align: top; }
+.admin-table tr:hover td { background: #0E0E1C; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.badge-inf { background: rgba(96,165,250,0.1); color: #60A5FA; }
+.badge-cc { background: rgba(192,132,252,0.1); color: #C084FC; }
+.badge-int { background: rgba(74,222,128,0.1); color: #4ADE80; }
+.badge-mul { background: rgba(251,146,60,0.1); color: #FB923C; }
+.empty-state { text-align: center; padding: 64px 20px; color: var(--muted); font-size: 13px; }
+.empty-state div { font-size: 32px; margin-bottom: 12px; opacity: 0.5; }
+.del-row { background: transparent; border: none; color: #2A1818; cursor: pointer; font-size: 14px; padding: 3px 5px; transition: color 0.2s; }
+.del-row:hover { color: var(--red); }
+.admin-logout { background: transparent; border: none; color: var(--muted); font-size: 11px; cursor: pointer; font-family: 'Outfit', sans-serif; padding: 4px 8px; transition: color 0.2s; }
+.admin-logout:hover { color: #fff; }
+
+/* private link info */
+.private-link-box {
+  background: rgba(212,168,67,0.05);
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  word-break: break-all;
+}
+.private-link-box strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+.copy-link-btn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.2s;
+}
+.copy-link-btn:hover { background: var(--gold-dim); }
+
+@media (max-width: 640px) {
+  nav { padding: 14px 18px; }
+  .roles, .sdiv { padding-left: 18px; padding-right: 18px; }
+  .perks-section { padding: 40px 18px; }
+  .reg-form { padding: 28px 18px; }
+  .form-two { grid-template-columns: 1fr; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+  .settings-grid { grid-template-columns: 1fr; }
+  .hero { padding: 72px 18px 52px; }
+}
+</style>
+</head>
+<body>
+
+<!-- PRIVATE GATE -->
+<div id="privateGate">
+  <div class="gate-box">
+    <div class="lock-icon">🔒</div>
+    <div class="gate-logo">Raja Choudhary</div>
+    <h2>Private Page</h2>
+    <p>This registration page is private. Enter the access code to continue.</p>
+    <input type="password" class="gate-input" id="gateInput" placeholder="Enter access code" onkeydown="if(event.key==='Enter')checkGate()"/>
+    <div class="gate-err" id="gateErr">Incorrect access code. Please try again.</div>
+    <button class="gate-btn" onclick="checkGate()">Continue →</button>
+  </div>
+</div>
+
+<div class="topbar"></div>
+
+<nav>
+  <div class="logo">Raja Choudhary
+    <small>Social Media Marketing</small>
+  </div>
+  <div class="nav-right">
+    <button class="btn-admin" onclick="openAdmin()">⚙ Admin</button>
+    <a href="#register" class="btn-cta">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Now Hiring — Ahmedabad</div>
+  <h1>Join Our<br/><em>Creative</em> Team</h1>
+  <p class="hero-sub">Influencers, content creators &amp; interns — grow with us and build something real.</p>
+  <div class="hero-actions">
+    <a href="#register" class="hero-cta">Apply Now</a>
+    <a href="#positions" class="hero-secondary">View Positions</a>
+  </div>
+</section>
+
+<div class="sdiv"><span>Open Positions</span></div>
+
+<div class="roles" id="positions">
+  <div class="role-card">
+    <div class="role-num">Position 01</div>
+    <div class="role-title">Influencer</div>
+    <div class="role-desc">Brand collabs, sponsored content &amp; promotions. Min. 1K followers preferred.</div>
+  </div>
+  <div class="role-card">
+    <div class="role-num">Position 02</div>
+    <div class="role-title">Content Creator</div>
+    <div class="role-desc">Reels, posts, stories &amp; creative campaigns. Portfolio required.</div>
+  </div>
+  <div class="role-card">
+    <div class="role-num">Position 03</div>
+    <div class="role-title">Intern</div>
+    <div class="role-desc">Marketing strategy &amp; brand growth support. Open to freshers.</div>
+  </div>
+</div>
+
+<div class="perks-section">
+  <h2>What You <span>Get</span></h2>
+  <div class="perks-grid">
+    <div class="perk"><div class="perk-icon">🎬</div>Real Shoots</div>
+    <div class="perk"><div class="perk-icon">📈</div>Brand Growth</div>
+    <div class="perk"><div class="perk-icon">💰</div>Paid Work</div>
+    <div class="perk"><div class="perk-icon">🤝</div>Collabs</div>
+    <div class="perk"><div class="perk-icon">🏆</div>Portfolio</div>
+    <div class="perk"><div class="perk-icon">📍</div>Ahmedabad</div>
+  </div>
+</div>
+
+<!-- FORM -->
+<section class="form-section" id="register">
+  <h2>Register to Apply</h2>
+  <p>Fill in all required fields. Raja will contact you within 2–3 days.</p>
+
+  <div class="reg-form">
+    <div id="formContent">
+
+      <div class="form-section-label">Personal Info</div>
+
+      <div class="form-two">
+        <div class="form-group">
+          <label>Full Name <span class="req">✦</span></label>
+          <input type="text" id="f-name" placeholder="Your full name"/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number <span class="req">✦</span></label>
+          <input type="tel" id="f-phone" placeholder="10-digit mobile number" maxlength="10"/>
+        </div>
+      </div>
+
+      <div class="form-two">
+        <div class="form-group">
+          <label>Email Address <span class="req">✦</span></label>
+          <input type="email" id="f-email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>City / Area <span class="req">✦</span></label>
+          <input type="text" id="f-city" placeholder="e.g. Satellite, Ahmedabad"/>
+        </div>
+      </div>
+
+      <div class="form-section-label">Role & Social</div>
+
+      <div class="form-group">
+        <label>Applying For <span class="req">✦</span></label>
+        <select id="f-role">
+          <option value="" disabled selected>Select a position</option>
+          <option value="influencer">Influencer</option>
+          <option value="content-creator">Content Creator</option>
+          <option value="intern">Intern (Marketing)</option>
+          <option value="multiple">Multiple Roles</option>
+        </select>
+      </div>
+
+      <div class="form-two">
+        <div class="form-group">
+          <label>Instagram Handle <span class="req">✦</span></label>
+          <input type="text" id="f-instagram" placeholder="@yourusername"/>
+        </div>
+        <div class="form-group">
+          <label>Instagram Followers <span class="req">✦</span></label>
+          <div class="follower-wrap">
+            <input type="number" id="f-followers" placeholder="e.g. 5400" min="0"/>
+            <span class="follower-unit">FOLLOWERS</span>
+          </div>
+          <div class="input-hint">Enter your exact follower count</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Content Niche <span class="req">✦</span></label>
+        <select id="f-niche">
+          <option value="" disabled selected>Select your niche</option>
+          <option value="fashion">Fashion &amp; Lifestyle</option>
+          <option value="food">Food &amp; Restaurants</option>
+          <option value="travel">Travel &amp; Places</option>
+          <option value="fitness">Fitness &amp; Health</option>
+          <option value="tech">Tech &amp; Gadgets</option>
+          <option value="beauty">Beauty &amp; Skincare</option>
+          <option value="comedy">Comedy &amp; Entertainment</option>
+          <option value="business">Business &amp; Motivation</option>
+          <option value="education">Education</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>About Yourself</label>
+        <textarea id="f-bio" placeholder="Your experience, skills, past collaborations…"></textarea>
+      </div>
+
+      <div class="privacy-box">
+        <p>🔒 <strong>Your data is 100% private.</strong> This information is only visible to Raja Choudhary and is used solely to contact you about this opportunity. We do not share, sell, or display your data publicly. You can request deletion anytime.</p>
+      </div>
+
+      <button class="submit-btn" onclick="submitForm()">Submit Application ✦</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">🎬</div>
+      <h3>Application Received!</h3>
+      <p>Thank you for registering.<br/>Raja will reach out within 2–3 days.</p>
+      <p style="margin-top:16px;font-size:12px;color:#3A3A55">Follow <strong style="color:var(--gold)">@heyy.rajaa</strong> on Instagram for updates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="contact-avatar">RC</div>
+  <div class="contact-name">Raja Choudhary</div>
+  <div class="contact-role">Social Media Marketing Manager · Ahmedabad</div>
+  <p style="font-size:13px;color:var(--muted);max-width:380px;margin:0 auto 24px;line-height:1.7;">Have a question before applying? Reach out directly — DM on Instagram, send a mail, or just call.</p>
+  <div class="contact-links">
+    <a href="https://instagram.com/heyy.rajaa" class="contact-link contact-link--ig" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      DM on Instagram
+      <span class="contact-handle">@heyy.rajaa</span>
+    </a>
+    <a href="mailto:crrj7877@gmail.com" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      crrj7877@gmail.com
+    </a>
+    <a href="tel:7877673066" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.95-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 78776 73066
+    </a>
+  </div>
+</div>
+
+<footer>&copy; 2025 <span>Raja Choudhary</span> — Social Media Marketing Manager, Ahmedabad</footer>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
+
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <div>
+      <h2>Admin Dashboard</h2>
+      <p>Registered applicants — visible only to you</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="admin-logout" id="logoutBtn" onclick="adminLogout()" style="display:none">Logout</button>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="admin-login" id="adminLogin">
+    <h3>Admin Login</h3>
+    <p>Enter your password to view all registrations.</p>
+    <input type="password" id="adminPwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')adminLogin()"/>
+    <div class="login-err" id="loginErr">Incorrect password. Try again.</div>
+    <button class="admin-login-btn" onclick="adminLogin()">Login →</button>
+    <p style="font-size:11px;color:#333;margin-top:8px">Default: <code style="color:var(--gold)">raja2025</code> — change in Settings after login.</p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="admin-dash" id="adminDash">
+    <div class="admin-stats">
+      <div class="stat-box"><div class="stat-num" id="s-total">0</div><div class="stat-lbl">Total</div></div>
+      <div class="stat-box"><div class="stat-num" id="s-inf">0</div><div class="stat-lbl">Influencers</div></div>
+      <div class="stat-box"><div class="stat-num" id="s-cc">0</div><div class="stat-lbl">Creators</div></div>
+      <div class="stat-box"><div class="stat-num" id="s-int">0</div><div class="stat-lbl">Interns</div></div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="settings-section" id="settingsSection">
+      <div class="settings-tabs">
+        <button class="stab active" onclick="switchTab('tab-criteria')">Follower Criteria</button>
+        <button class="stab" onclick="switchTab('tab-password')">Change Password</button>
+        <button class="stab" onclick="switchTab('tab-private')">Private Link</button>
+      </div>
+
+      <!-- Tab 1: Follower Criteria -->
+      <div class="stab-panel active" id="tab-criteria">
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label>Influencer Min. Followers</label>
+            <input type="number" id="set-inf-min" placeholder="e.g. 5000"/>
+          </div>
+          <div class="setting-item">
+            <label>Content Creator Min. Followers</label>
+            <input type="number" id="set-cc-min" placeholder="e.g. 1000"/>
+          </div>
+          <div class="setting-item">
+            <label>Intern Min. Followers</label>
+            <input type="number" id="set-int-min" placeholder="e.g. 0"/>
+          </div>
+          <div class="setting-item">
+            <label>Highlight applicants above</label>
+            <input type="number" id="set-highlight" placeholder="e.g. 10000"/>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px">These are display-only criteria shown in admin. All applications are still accepted.</div>
+        <button class="save-settings-btn" onclick="saveSettings()">Save Criteria</button>
+        <div class="settings-saved" id="settingsSaved">✓ Saved successfully</div>
+      </div>
+
+      <!-- Tab 2: Password -->
+      <div class="stab-panel" id="tab-password">
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label>New Admin Password</label>
+            <input type="password" id="set-new-pwd" placeholder="Enter new password"/>
+          </div>
+          <div class="setting-item">
+            <label>Confirm Password</label>
+            <input type="password" id="set-confirm-pwd" placeholder="Confirm password"/>
+          </div>
+        </div>
+        <button class="save-settings-btn" onclick="changePassword()">Update Password</button>
+        <div class="settings-saved" id="pwdSaved">✓ Password updated</div>
+        <div class="login-err" id="pwdErr" style="display:none;margin-top:6px">Passwords do not match.</div>
+      </div>
+
+      <!-- Tab 3: Private Link -->
+      <div class="stab-panel" id="tab-private">
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label>Private Mode</label>
+            <select id="set-private-mode">
+              <option value="off">Off (Public)</option>
+              <option value="url">URL Token (share link)</option>
+              <option value="code">Access Code (enter on page)</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label>Token / Code Value</label>
+            <input type="text" id="set-private-token" placeholder="e.g. clapstick2025"/>
+          </div>
+        </div>
+        <button class="save-settings-btn" onclick="savePrivateSettings()">Save & Generate Link</button>
+        <div class="private-link-box" id="privateLinkBox" style="display:none">
+          <strong>Your Private Link</strong>
+          <span id="privateLinkText"></span>
+          <br/>
+          <button class="copy-link-btn" onclick="copyPrivateLink()">Copy Link</button>
+        </div>
+        <div class="settings-saved" id="privateSaved">✓ Settings saved</div>
+      </div>
+    </div>
+
+    <div class="admin-toolbar">
+      <input class="search-box" id="searchBox" placeholder="Search by name, phone, niche…" oninput="renderTable()"/>
+      <select class="filter-sel" id="filterRole" onchange="renderTable()">
+        <option value="">All Roles</option>
+        <option value="influencer">Influencer</option>
+        <option value="content-creator">Content Creator</option>
+        <option value="intern">Intern</option>
+        <option value="multiple">Multiple</option>
+      </select>
+      <button class="settings-btn" onclick="toggleSettings()">⚙ Settings</button>
+      <button class="export-btn" onclick="exportCSV()">↓ Export CSV</button>
+      <button class="clear-btn" onclick="clearAll()">✕ Clear All</button>
+    </div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Instagram</th>
+            <th>Followers</th>
+            <th>Niche</th>
+            <th>City</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="applicantTable"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div>📭</div>No registrations yet. Share your link and wait for applicants!
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== STORAGE KEYS ======
+const STORE_KEY = 'raja_applicants_v1';
+const SETTINGS_KEY = 'raja_settings_v1';
+
+// ====== DEFAULT SETTINGS ======
+function defaultSettings() {
+  return {
+    adminPwd: 'raja2025',
+    infMin: 5000,
+    ccMin: 1000,
+    intMin: 0,
+    highlight: 10000,
+    privateMode: 'off',
+    privateToken: 'clapstick2025'
+  };
+}
+
+function loadSettings() {
+  try { return { ...defaultSettings(), ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') }; }
+  catch { return defaultSettings(); }
+}
+function saveSettingsData(s) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+
+// ====== STORAGE ======
+function loadApplicants() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return []; }
+}
+function saveApplicants(data) { localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+
+// ====== PRIVATE GATE ======
+function initGate() {
+  const s = loadSettings();
+  if (s.privateMode === 'off') return; // public
+
+  if (s.privateMode === 'url') {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('access') || params.get('token');
+    if (token === s.privateToken) return; // correct URL token
+    showGate(true); // show "Private Page" message, no input needed
+    return;
+  }
+
+  if (s.privateMode === 'code') {
+    // Check if already unlocked in session
+    if (sessionStorage.getItem('raja_gate') === 'yes') return;
+    showGate(false);
+  }
+}
+
+function showGate(urlOnly) {
+  const gate = document.getElementById('privateGate');
+  gate.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  if (urlOnly) {
+    // Hide input, just show message
+    document.querySelector('.gate-input').style.display = 'none';
+    document.querySelector('.gate-btn').style.display = 'none';
+    document.querySelector('#privateGate p').textContent = 'This page requires a valid private link. Please request it from Raja Choudhary.';
+  }
+}
+
+function checkGate() {
+  const s = loadSettings();
+  const val = document.getElementById('gateInput').value.trim();
+  if (val === s.privateToken) {
+    sessionStorage.setItem('raja_gate', 'yes');
+    document.getElementById('privateGate').style.display = 'none';
+    document.body.style.overflow = '';
+  } else {
+    document.getElementById('gateErr').style.display = 'block';
+  }
+}
+
+// ====== FORM SUBMIT ======
+function submitForm() {
+  const get = id => document.getElementById(id).value.trim();
+  const name = get('f-name'), phone = get('f-phone'), email = get('f-email'),
+    city = get('f-city'), role = get('f-role'), instagram = get('f-instagram'),
+    followers = get('f-followers'), niche = get('f-niche'), bio = get('f-bio');
+
+  if (!name || !phone || !email || !city || !role || !instagram || !followers || !niche) {
+    alert('Please fill all required fields marked with ✦'); return;
+  }
+  if (!/^\d{10}$/.test(phone)) { alert('Enter a valid 10-digit phone number.'); return; }
+  if (!email.includes('@') || !email.includes('.')) { alert('Enter a valid email address.'); return; }
+  if (isNaN(followers) || parseInt(followers) < 0) { alert('Enter a valid follower count.'); return; }
+
+  const entry = {
+    id: Date.now(), name, phone, email, city, role, instagram,
+    followers: parseInt(followers).toLocaleString('en-IN'),
+    niche, bio,
+    date: new Date().toLocaleDateString('en-IN')
+  };
+  const list = loadApplicants();
+  list.unshift(entry);
+  saveApplicants(list);
+
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+
+// ====== ADMIN ======
+function openAdmin() {
+  document.getElementById('adminOverlay').style.display = 'block';
+  document.getElementById('adminPanel').style.display = 'flex';
+  const sess = sessionStorage.getItem('raja_admin');
+  if (sess === 'yes') showDash();
+}
+function closeAdmin() {
+  document.getElementById('adminOverlay').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'none';
+}
+function adminLogin() {
+  const s = loadSettings();
+  const pwd = document.getElementById('adminPwd').value;
+  if (pwd === s.adminPwd) {
+    sessionStorage.setItem('raja_admin', 'yes');
+    document.getElementById('loginErr').style.display = 'none';
+    showDash();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+function adminLogout() {
+  sessionStorage.removeItem('raja_admin');
+  document.getElementById('adminDash').style.display = 'none';
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('adminPwd').value = '';
+}
+function showDash() {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminDash').style.display = 'flex';
+  document.getElementById('logoutBtn').style.display = 'inline';
+  loadSettingsIntoUI();
+  renderTable();
+}
+
+// ====== SETTINGS ======
+function toggleSettings() {
+  const s = document.getElementById('settingsSection');
+  s.style.display = s.style.display === 'block' ? 'none' : 'block';
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.stab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function loadSettingsIntoUI() {
+  const s = loadSettings();
+  document.getElementById('set-inf-min').value = s.infMin;
+  document.getElementById('set-cc-min').value = s.ccMin;
+  document.getElementById('set-int-min').value = s.intMin;
+  document.getElementById('set-highlight').value = s.highlight;
+  document.getElementById('set-private-mode').value = s.privateMode;
+  document.getElementById('set-private-token').value = s.privateToken;
+}
+
+function saveSettings() {
+  const s = loadSettings();
+  s.infMin = parseInt(document.getElementById('set-inf-min').value) || 0;
+  s.ccMin = parseInt(document.getElementById('set-cc-min').value) || 0;
+  s.intMin = parseInt(document.getElementById('set-int-min').value) || 0;
+  s.highlight = parseInt(document.getElementById('set-highlight').value) || 10000;
+  saveSettingsData(s);
+  const el = document.getElementById('settingsSaved');
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 2500);
+  renderTable();
+}
+
+function changePassword() {
+  const np = document.getElementById('set-new-pwd').value;
+  const cp = document.getElementById('set-confirm-pwd').value;
+  const errEl = document.getElementById('pwdErr');
+  const savedEl = document.getElementById('pwdSaved');
+  if (!np) { errEl.textContent = 'Please enter a new password.'; errEl.style.display = 'block'; return; }
+  if (np !== cp) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+  const s = loadSettings();
+  s.adminPwd = np;
+  saveSettingsData(s);
+  savedEl.style.display = 'block';
+  setTimeout(() => savedEl.style.display = 'none', 2500);
+  document.getElementById('set-new-pwd').value = '';
+  document.getElementById('set-confirm-pwd').value = '';
+}
+
+function savePrivateSettings() {
+  const s = loadSettings();
+  s.privateMode = document.getElementById('set-private-mode').value;
+  s.privateToken = document.getElementById('set-private-token').value.trim() || 'clapstick2025';
+  saveSettingsData(s);
+
+  const box = document.getElementById('privateLinkBox');
+  const linkText = document.getElementById('privateLinkText');
+  const savedEl = document.getElementById('privateSaved');
+
+  if (s.privateMode === 'url') {
+    const base = window.location.href.split('?')[0];
+    const link = `${base}?access=${encodeURIComponent(s.privateToken)}`;
+    linkText.textContent = link;
+    box.style.display = 'block';
+  } else if (s.privateMode === 'code') {
+    linkText.textContent = `Access Code: ${s.privateToken}`;
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+
+  savedEl.style.display = 'block';
+  setTimeout(() => savedEl.style.display = 'none', 2500);
+}
+
+function copyPrivateLink() {
+  const text = document.getElementById('privateLinkText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    document.querySelector('.copy-link-btn').textContent = '✓ Copied!';
+    setTimeout(() => document.querySelector('.copy-link-btn').textContent = 'Copy Link', 2000);
+  });
+}
+
+// ====== RENDER TABLE ======
+function renderTable() {
+  const list = loadApplicants();
+  const s = loadSettings();
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  const rf = document.getElementById('filterRole').value;
+
+  const filtered = list.filter(r => {
+    const match = !q || [r.name,r.phone,r.email,r.niche,r.city,r.instagram].join(' ').toLowerCase().includes(q);
+    const roleMatch = !rf || r.role === rf;
+    return match && roleMatch;
+  });
+
+  document.getElementById('s-total').textContent = list.length;
+  document.getElementById('s-inf').textContent = list.filter(r => r.role === 'influencer').length;
+  document.getElementById('s-cc').textContent = list.filter(r => r.role === 'content-creator').length;
+  document.getElementById('s-int').textContent = list.filter(r => r.role === 'intern').length;
+
+  const tbody = document.getElementById('applicantTable');
+  const empty = document.getElementById('emptyState');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  const badges = { influencer:'badge-inf', 'content-creator':'badge-cc', intern:'badge-int', multiple:'badge-mul' };
+  const labels = { influencer:'Influencer', 'content-creator':'Creator', intern:'Intern', multiple:'Multiple' };
+
+  // Parse follower count for criteria check
+  function rawFollowers(str) { return parseInt((str||'0').replace(/,/g,'')) || 0; }
+  const minMap = { influencer: s.infMin, 'content-creator': s.ccMin, intern: s.intMin };
+
+  tbody.innerHTML = filtered.map((r, i) => {
+    const fc = rawFollowers(r.followers);
+    const minReq = minMap[r.role] || 0;
+    const meetsMin = fc >= minReq;
+    const isHighlight = fc >= s.highlight;
+    const rowStyle = isHighlight ? 'background:rgba(212,168,67,0.04)' : '';
+    const followersDisplay = isHighlight
+      ? `<span style="color:var(--gold);font-weight:600">${r.followers||'—'} ★</span>`
+      : `<span style="color:${meetsMin ? 'var(--muted)' : 'var(--red)'}">${r.followers||'—'}${!meetsMin && r.role !== 'multiple' ? ' ⚠' : ''}</span>`;
+
+    return `
+    <tr style="${rowStyle}">
+      <td style="color:var(--muted)">${i+1}</td>
+      <td style="font-weight:500">${r.name}</td>
+      <td><a href="tel:${r.phone}" style="color:#60A5FA;text-decoration:none">${r.phone}</a></td>
+      <td style="color:var(--muted);font-size:11px">${r.email}</td>
+      <td><span class="badge ${badges[r.role]||'badge-mul'}">${labels[r.role]||r.role}</span></td>
+      <td style="color:#C084FC">${r.instagram||'—'}</td>
+      <td style="font-size:12px">${followersDisplay}</td>
+      <td style="font-size:11px;color:var(--muted)">${r.niche||'—'}</td>
+      <td style="font-size:11px;color:var(--muted)">${r.city}</td>
+      <td style="font-size:11px;color:var(--muted)">${r.date}</td>
+      <td><button class="del-row" onclick="deleteRow(${r.id})" title="Delete">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteRow(id) {
+  if (!confirm('Delete this applicant?')) return;
+  saveApplicants(loadApplicants().filter(r => r.id !== id));
+  renderTable();
+}
+function clearAll() {
+  if (!confirm('Delete ALL registrations? This cannot be undone.')) return;
+  saveApplicants([]);
+  renderTable();
+}
+
+// ====== EXPORT CSV ======
+function exportCSV() {
+  const list = loadApplicants();
+  if (!list.length) { alert('No data to export.'); return; }
+  const headers = ['Name','Phone','Email','Role','Instagram','Followers','Niche','City','Bio','Date'];
+  const rows = list.map(r => [r.name,r.phone,r.email,r.role,r.instagram,r.followers,r.niche,r.city,(r.bio||'').replace(/,/g,' '),r.date].map(v=>`"${v}"`).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = 'clapstick_applicants.csv';
+  a.click();
+}
+
+// ====== INIT ======
+initGate();
+</script>
+</body>
+</html>
