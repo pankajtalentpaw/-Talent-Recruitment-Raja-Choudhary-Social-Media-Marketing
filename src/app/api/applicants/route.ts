@@ -1,7 +1,7 @@
 import { ObjectId, type WithId } from "mongodb";
 import { NextResponse } from "next/server";
 import { hasAdminSession } from "@/lib/adminAuth";
-import { getDatabase } from "@/lib/mongodb";
+import { DatabaseConfigurationError, getDatabase } from "@/lib/mongodb";
 import type { Applicant, ApplicantInput, ApplicantRole } from "@/types";
 
 const APPLICANT_ROLES: ApplicantRole[] = [
@@ -18,6 +18,25 @@ interface ApplicantDocument extends ApplicantInput {
 function getApplicantsCollection() {
   return getDatabase().then((database) =>
     database.collection<ApplicantDocument>("applicants"),
+  );
+}
+
+function databaseErrorResponse(error: unknown, action: string) {
+  console.error(`${action}:`, error instanceof Error ? error.message : error);
+
+  if (error instanceof DatabaseConfigurationError) {
+    return NextResponse.json(
+      {
+        error:
+          "Application database is not configured. Please contact the administrator.",
+      },
+      { status: 503 },
+    );
+  }
+
+  return NextResponse.json(
+    { error: "Database connection failed. Please try again shortly." },
+    { status: 503 },
   );
 }
 
@@ -96,11 +115,8 @@ export async function GET() {
     return NextResponse.json({
       applicants: applicants.map(serializeApplicant),
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Unable to load applicants." },
-      { status: 500 },
-    );
+  } catch (error) {
+    return databaseErrorResponse(error, "Unable to load applicants");
   }
 }
 
@@ -124,11 +140,8 @@ export async function POST(request: Request) {
       },
       { status: 201 },
     );
-  } catch {
-    return NextResponse.json(
-      { error: "Unable to save your application." },
-      { status: 500 },
-    );
+  } catch (error) {
+    return databaseErrorResponse(error, "Unable to save applicant");
   }
 }
 
@@ -155,10 +168,7 @@ export async function DELETE(request: Request) {
 
     await collection.deleteOne({ _id: new ObjectId(id) });
     return NextResponse.json({ deleted: true });
-  } catch {
-    return NextResponse.json(
-      { error: "Unable to delete applicants." },
-      { status: 500 },
-    );
+  } catch (error) {
+    return databaseErrorResponse(error, "Unable to delete applicants");
   }
 }
