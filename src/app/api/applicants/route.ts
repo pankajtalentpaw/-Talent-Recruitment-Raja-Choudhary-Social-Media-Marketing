@@ -22,16 +22,34 @@ function getApplicantsCollection() {
 }
 
 function databaseErrorResponse(error: unknown, action: string) {
-  console.error(`${action}:`, error instanceof Error ? error.message : error);
+  const name = error instanceof Error ? error.name : "UnknownError";
+  const message = error instanceof Error ? error.message : String(error);
+
+  // Full error visible in Vercel → Project → Functions → Logs
+  console.error(`[DB ERROR] ${action} | ${name}: ${message}`);
 
   if (error instanceof DatabaseConfigurationError) {
     return NextResponse.json(
-      {
-        error:
-          "Application database is not configured. Please contact the administrator.",
-      },
+      { error: "Database is not configured. MONGODB_URI environment variable is missing." },
       { status: 503 },
     );
+  }
+
+  // Distinguish the two most common Vercel/Atlas failure modes
+  const isNetworkBlock =
+    message.includes("timed out") ||
+    message.includes("ECONNREFUSED") ||
+    message.includes("ENOTFOUND") ||
+    message.includes("connection closed");
+
+  const isAuthFailure =
+    message.includes("Authentication failed") ||
+    message.includes("auth");
+
+  if (isAuthFailure) {
+    console.error("[DB ERROR] Hint: Wrong MongoDB username or password in MONGODB_URI");
+  } else if (isNetworkBlock) {
+    console.error("[DB ERROR] Hint: MongoDB Atlas Network Access is blocking this IP. Add 0.0.0.0/0 in Atlas → Network Access.");
   }
 
   return NextResponse.json(
