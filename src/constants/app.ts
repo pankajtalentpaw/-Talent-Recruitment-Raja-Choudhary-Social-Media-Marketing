@@ -17,29 +17,35 @@ export const OPEN_POSITIONS = [
     number: "Position 01",
     title: "Influencer",
     description:
-      "Brand collabs, sponsored content & promotions. Min. 1K followers preferred.",
+      "Brand collabs, sponsored content & promotions. Build lasting partnerships with top local and national brands.",
+    icon: "⭐",
+    tags: ["Brand Deals", "Paid Collab", "1K+ Followers"],
   },
   {
     number: "Position 02",
     title: "Content Creator",
     description:
-      "Reels, posts, stories & creative campaigns. Portfolio required.",
+      "Reels, posts, stories & creative campaigns. Bring your visual storytelling skills and grow your portfolio.",
+    icon: "🎬",
+    tags: ["Reels & Posts", "Portfolio", "Creative"],
   },
   {
     number: "Position 03",
     title: "Intern",
     description:
-      "Marketing strategy & brand growth support. Open to freshers.",
+      "Marketing strategy & brand growth support. Open to freshers eager to learn the industry from the inside.",
+    icon: "🚀",
+    tags: ["Marketing", "Strategy", "Fresher OK"],
   },
 ];
 
 export const PERKS = [
-  { icon: "🎬", label: "Real Shoots" },
-  { icon: "📈", label: "Brand Growth" },
-  { icon: "💰", label: "Paid Work" },
-  { icon: "🤝", label: "Collabs" },
-  { icon: "🏆", label: "Portfolio" },
-  { icon: "📍", label: "Ahmedabad" },
+  { icon: "🎬", label: "Real Shoots", description: "Hands-on production experience" },
+  { icon: "📈", label: "Brand Growth", description: "Grow your personal brand fast" },
+  { icon: "💰", label: "Paid Work", description: "Earn while you create" },
+  { icon: "🤝", label: "Collabs", description: "Network with top creators" },
+  { icon: "🏆", label: "Portfolio", description: "Build a standout portfolio" },
+  { icon: "📍", label: "Ahmedabad", description: "Local community, global reach" },
 ];
 
 export const ROLE_OPTIONS: Array<{ value: ApplicantRole; label: string }> = [

@@ -1,6 +1,5 @@
 "use client";
 
-import { AdminPanel } from "@/components/admin/AdminPanel";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { Footer } from "@/components/layout/Footer";
@@ -10,25 +9,15 @@ import { PrivateGate } from "@/components/private-gate/PrivateGate";
 import { RegistrationSection } from "@/components/registration/RegistrationSection";
 import { RolesSection } from "@/components/roles/RolesSection";
 import { useApplicants } from "@/hooks/useApplicants";
-import { useSettings } from "@/hooks/useSettings";
-import { useState } from "react";
 
 export default function Home() {
-  const [adminOpen, setAdminOpen] = useState(false);
-  const {
-    applicants,
-    addApplicant,
-    deleteApplicant,
-    clearApplicants,
-    refreshApplicants,
-  } = useApplicants();
-  const { settings, updateSettings } = useSettings();
+  const { addApplicant } = useApplicants();
 
   return (
     <>
       <PrivateGate />
       <div className="h-[3px] bg-topbar-gradient" />
-      <Navbar onOpenAdmin={() => setAdminOpen(true)} />
+      <Navbar />
       <main>
         <HeroSection />
         <RolesSection />
@@ -37,16 +26,6 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
-      <AdminPanel
-        open={adminOpen}
-        settings={settings}
-        applicants={applicants}
-        onClose={() => setAdminOpen(false)}
-        onUpdateSettings={updateSettings}
-        onDeleteApplicant={deleteApplicant}
-        onClearApplicants={clearApplicants}
-        onRefreshApplicants={refreshApplicants}
-      />
     </>
   );
 }

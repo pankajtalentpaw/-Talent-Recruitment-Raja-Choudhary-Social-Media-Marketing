@@ -1,83 +1,125 @@
-import { Button } from "@/components/common/Button";
+"use client";
+
+import { useState, useEffect } from "react";
 import { ClapstickMediaMark } from "./ClapstickMediaMark";
 
-interface NavbarProps {
-  onOpenAdmin: () => void;
-}
+const NAV_LINKS = [
+  { label: "Positions", href: "#positions" },
+  { label: "Benefits", href: "#perks" },
+  { label: "Apply", href: "#register" },
+  { label: "Contact", href: "#contact" },
+];
 
-export function Navbar({ onOpenAdmin }: NavbarProps) {
+export function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 20);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-[200] border-b border-border bg-[rgba(7,7,13,0.96)] shadow-[0_12px_32px_rgba(0,0,0,0.16)] backdrop-blur-[16px] [border-bottom-width:0.5px]">
-      <div className="mx-auto flex min-h-[74px] w-full max-w-[1440px] items-center justify-between gap-[20px] px-[52px] max-sm:min-h-[68px] max-sm:gap-[12px] max-sm:px-[18px]">
-        <div className="flex min-w-0 items-center gap-[18px]">
+    <nav
+      className={`sticky top-0 z-[200] transition-all duration-300 ${
+        scrolled
+          ? "border-b border-border bg-[rgba(7,7,13,0.97)] shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-[20px] [border-bottom-width:0.5px]"
+          : "border-b border-transparent bg-[rgba(7,7,13,0.8)] backdrop-blur-[12px]"
+      }`}
+    >
+      <div className="mx-auto flex min-h-[70px] w-full max-w-[1440px] items-center justify-between gap-[20px] px-[48px] max-lg:px-[28px] max-sm:min-h-[64px] max-sm:px-[18px]">
+        {/* Brand */}
+        <div className="flex min-w-0 items-center gap-[16px]">
           <ClapstickMediaMark />
           <div
             aria-hidden="true"
-            className="h-[34px] w-px bg-border2 max-md:hidden"
+            className="h-[32px] w-px bg-border2 max-md:hidden"
           />
           <div className="min-w-0 max-md:hidden">
             <p className="text-[8px] font-medium uppercase tracking-[2.5px] text-muted">
               Talent Recruitment
             </p>
-            <p className="mt-[2px] truncate font-serif text-[17px] font-bold leading-none tracking-[0.4px] text-text">
+            <p className="mt-[2px] truncate font-serif text-[16px] font-bold leading-none tracking-[0.3px] text-text">
               Raja Choudhary
             </p>
-            <p className="mt-[4px] text-[8px] uppercase tracking-[2.3px] text-gold">
+            <p className="mt-[3px] text-[7.5px] uppercase tracking-[2.4px] text-gold">
               Social Media Marketing
             </p>
           </div>
         </div>
+
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-[2px] lg:flex">
+          {NAV_LINKS.slice(0, 3).map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="rounded-[6px] px-[14px] py-[8px] text-[12px] font-medium text-muted transition-colors duration-200 hover:bg-card hover:text-text"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Right actions */}
         <div className="flex shrink-0 items-center gap-[10px]">
-          <Button
-            aria-label="Open admin panel"
-            className="flex items-center gap-[7px] rounded-[8px] border border-border2 bg-transparent px-[14px] py-[9px] text-[11px] font-medium uppercase tracking-[1px] text-muted transition-all duration-200 hover:border-gold hover:text-gold max-sm:px-[10px]"
-            onClick={onOpenAdmin}
-          >
-            <AdminIcon />
-            <span className="max-sm:hidden">Admin</span>
-          </Button>
           <a
             href="#register"
-            className="flex items-center gap-[7px] rounded-[8px] bg-gold px-[20px] py-[10px] text-[12px] font-semibold uppercase tracking-[0.8px] text-bg no-underline transition-all duration-200 hover:-translate-y-px hover:bg-gold-light hover:shadow-gold-soft max-sm:px-[14px]"
+            className="hidden items-center gap-[7px] rounded-[8px] bg-gold px-[22px] py-[10px] text-[12px] font-semibold uppercase tracking-[0.8px] text-bg no-underline transition-all duration-200 hover:-translate-y-px hover:bg-gold-light hover:shadow-gold-soft sm:flex"
           >
             Apply Now
-            <ArrowIcon />
+            <ArrowUpRightIcon />
           </a>
+
+          {/* Mobile hamburger */}
+          <button
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className="flex h-[40px] w-[40px] items-center justify-center rounded-[8px] border border-border bg-card text-muted transition-all duration-200 hover:border-border2 hover:text-text lg:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="border-t border-border bg-[rgba(13,13,24,0.98)] px-[18px] pb-[20px] pt-[12px] backdrop-blur-[20px] [border-top-width:0.5px] lg:hidden">
+          <div className="flex flex-col gap-[4px]">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="rounded-[8px] px-[14px] py-[12px] text-[14px] font-medium text-muted transition-colors duration-200 hover:bg-card hover:text-text"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <a
+            href="#register"
+            className="mt-[12px] flex items-center justify-center gap-[7px] rounded-[8px] bg-gold px-[22px] py-[13px] text-[13px] font-semibold uppercase tracking-[0.8px] text-bg no-underline transition-all duration-200 hover:bg-gold-light"
+            onClick={() => setMenuOpen(false)}
+          >
+            Apply Now
+            <ArrowUpRightIcon />
+          </a>
+        </div>
+      )}
     </nav>
   );
 }
 
-function AdminIcon() {
+function ArrowUpRightIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-[14px] w-[14px]"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path
-        d="m19.4 13.3 1.05.82-1.8 3.11-1.24-.5a7.64 7.64 0 0 1-2.3 1.33l-.2 1.32h-3.6l-.19-1.32a7.64 7.64 0 0 1-2.3-1.33l-1.24.5-1.8-3.11 1.05-.82a7.72 7.72 0 0 1 0-2.66l-1.05-.82 1.8-3.11 1.24.5a7.64 7.64 0 0 1 2.3-1.33l.19-1.32h3.6l.2 1.32a7.64 7.64 0 0 1 2.3 1.33l1.24-.5 1.8 3.11-1.05.82a7.72 7.72 0 0 1 0 2.66Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-[13px] w-[13px]"
+      className="h-[12px] w-[12px]"
       fill="none"
       viewBox="0 0 24 24"
     >
@@ -86,7 +128,43 @@ function ArrowIcon() {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
+        strokeWidth="2.2"
+      />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-[18px] w-[18px]"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M3 7h18M3 12h18M3 17h18"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-[16px] w-[16px]"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M6 6l12 12M18 6 6 18"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
       />
     </svg>
   );

@@ -20,10 +20,10 @@ const INITIAL_VALUES: RegistrationValues = {
 };
 
 const FIELD_CLASS =
-  "w-full appearance-none rounded-[10px] border border-border bg-[#0A0A15] px-[16px] py-[13px] font-outfit text-[14px] text-white outline-none transition-[border-color,background] duration-200 placeholder:text-[#3A3A55] focus:border-gold focus:bg-[#0D0D1C] [&>option]:bg-[#111]";
+  "w-full appearance-none rounded-[10px] border border-border bg-[#0A0A16] px-[16px] py-[13px] font-outfit text-[14px] text-text outline-none transition-all duration-200 placeholder:text-muted focus:border-gold focus:bg-[#0C0C1A] focus:shadow-input-focus [&>option]:bg-[#0D0D1C]";
 
 const LABEL_CLASS =
-  "mb-[7px] flex items-center gap-[5px] text-[11px] font-medium uppercase tracking-[1px] text-muted";
+  "mb-[8px] flex items-center gap-[5px] text-[11px] font-semibold uppercase tracking-[1.2px] text-muted-light";
 
 interface RegistrationFormProps {
   submitting: boolean;
@@ -90,7 +90,8 @@ export function RegistrationForm({
 
   return (
     <form noValidate onSubmit={submitForm}>
-      <FormSectionLabel>Personal Info</FormSectionLabel>
+      {/* Personal Info */}
+      <FormSectionLabel icon="👤">Personal Info</FormSectionLabel>
 
       <div className="grid grid-cols-2 gap-[16px] max-sm:grid-cols-1">
         <FormGroup label="Full Name" required>
@@ -111,7 +112,7 @@ export function RegistrationForm({
             maxLength={10}
             pattern="[0-9]*"
             value={values.phone}
-            placeholder="10-digit mobile number"
+            placeholder="10-digit mobile"
             onChange={updatePhone}
           />
         </FormGroup>
@@ -139,7 +140,8 @@ export function RegistrationForm({
         </FormGroup>
       </div>
 
-      <FormSectionLabel>Role & Social</FormSectionLabel>
+      {/* Role & Social */}
+      <FormSectionLabel icon="📱">Role &amp; Social</FormSectionLabel>
 
       <FormGroup label="Applying For" required>
         <Select
@@ -172,7 +174,7 @@ export function RegistrationForm({
         <FormGroup label="Instagram Followers" required>
           <div className="relative">
             <Input
-              className={`${FIELD_CLASS} pr-[80px]`}
+              className={`${FIELD_CLASS} pr-[90px]`}
               name="followers"
               type="number"
               min="0"
@@ -180,12 +182,9 @@ export function RegistrationForm({
               placeholder="e.g. 5400"
               onChange={updateValue}
             />
-            <span className="pointer-events-none absolute right-[14px] top-1/2 -translate-y-1/2 text-[11px] font-medium tracking-[1px] text-muted">
-              FOLLOWERS
+            <span className="pointer-events-none absolute right-[14px] top-1/2 -translate-y-1/2 rounded-[4px] bg-surface px-[6px] py-[2px] text-[9px] font-semibold uppercase tracking-[1px] text-muted">
+              Followers
             </span>
-          </div>
-          <div className="mt-[5px] text-[11px] text-[#3A3A55]">
-            Enter your exact follower count
           </div>
         </FormGroup>
       </div>
@@ -210,7 +209,7 @@ export function RegistrationForm({
 
       <FormGroup label="About Yourself">
         <Textarea
-          className={`${FIELD_CLASS} min-h-[90px] resize-y`}
+          className={`${FIELD_CLASS} min-h-[100px] resize-y`}
           name="bio"
           value={values.bio}
           placeholder="Your experience, skills, past collaborations…"
@@ -218,21 +217,49 @@ export function RegistrationForm({
         />
       </FormGroup>
 
-      <div className="mb-[26px] mt-[22px] rounded-[10px] border border-[rgba(46,204,122,0.15)] bg-[rgba(46,204,122,0.05)] px-[18px] py-[14px]">
-        <p className="text-[12px] leading-[1.7] text-[#5A8F70]">
-          🔒 <strong className="text-green">Your data is 100% private.</strong>{" "}
-          This information is only visible to Raja Choudhary and is used solely
-          to contact you about this opportunity. We do not share, sell, or
-          display your data publicly. You can request deletion anytime.
+      {/* Privacy notice */}
+      <div className="mb-[28px] mt-[8px] flex items-start gap-[12px] rounded-[12px] border border-[rgba(46,204,122,0.15)] bg-[rgba(46,204,122,0.04)] px-[18px] py-[16px]">
+        <div className="mt-[1px] flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border border-[rgba(46,204,122,0.3)] bg-green-dim text-[11px]">
+          🔒
+        </div>
+        <p className="text-[12px] leading-[1.7] text-muted">
+          <strong className="font-semibold text-green">100% Private.</strong>{" "}
+          Your information is only visible to Raja Choudhary and is used solely
+          to contact you about this opportunity. We never share, sell, or display
+          your data publicly. Request deletion anytime.
         </p>
       </div>
 
+      {/* Submit */}
       <Button
         disabled={submitting}
         type="submit"
-        className="w-full rounded-[10px] border-0 bg-gold p-[15px] text-[15px] font-semibold tracking-[0.3px] text-bg transition-[background,transform,box-shadow] duration-200 hover:-translate-y-px hover:bg-gold-light hover:shadow-gold-strong active:translate-y-0 disabled:cursor-wait disabled:opacity-70"
+        className="group flex h-[52px] w-full items-center justify-center gap-[8px] rounded-[12px] border-0 bg-gold text-[15px] font-semibold tracking-[0.3px] text-bg transition-all duration-200 hover:-translate-y-[2px] hover:bg-gold-light hover:shadow-gold-glow active:translate-y-0 disabled:cursor-wait disabled:opacity-60"
       >
-        {submitting ? "Submitting..." : "Submit Application ✦"}
+        {submitting ? (
+          <>
+            <SpinnerIcon />
+            Submitting…
+          </>
+        ) : (
+          <>
+            Submit Application
+            <svg
+              aria-hidden="true"
+              className="h-[15px] w-[15px] transition-transform duration-200 group-hover:translate-x-[2px]"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 17 17 7m-7 0h7v7"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.2"
+              />
+            </svg>
+          </>
+        )}
       </Button>
     </form>
   );
@@ -246,20 +273,63 @@ interface FormGroupProps {
 
 function FormGroup({ label, required, children }: FormGroupProps) {
   return (
-    <div className="mb-[22px]">
+    <div className="mb-[20px]">
       <label className={LABEL_CLASS}>
         {label}
-        {required ? <span className="text-[10px] text-gold">✦</span> : null}
+        {required ? (
+          <span className="text-[10px] text-gold">✦</span>
+        ) : (
+          <span className="rounded-[3px] bg-card px-[5px] py-[1px] text-[8px] normal-case tracking-[0.5px] text-muted">
+            optional
+          </span>
+        )}
       </label>
       {children}
     </div>
   );
 }
 
-function FormSectionLabel({ children }: { children: React.ReactNode }) {
+function FormSectionLabel({
+  icon,
+  children,
+}: {
+  icon: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="mb-[18px] mt-[28px] flex items-center gap-[10px] border-b border-border pb-[8px] text-[9px] uppercase tracking-[3px] text-muted [border-bottom-width:0.5px] first:mt-0 after:h-px after:flex-1 after:scale-y-50 after:bg-border after:content-['']">
-      {children}
+    <div className="mb-[20px] mt-[32px] flex items-center gap-[10px] first:mt-0">
+      <div className="flex h-[28px] w-[28px] items-center justify-center rounded-[6px] border border-border bg-surface text-[13px]">
+        {icon}
+      </div>
+      <span className="text-[9px] font-semibold uppercase tracking-[3px] text-muted">
+        {children}
+      </span>
+      <div className="h-px flex-1 bg-border [transform:scaleY(0.5)]" />
     </div>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-[16px] w-[16px] animate-spin"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="3"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
   );
 }
